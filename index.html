@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recargas de Saldo - México</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://source.unsplash.com/1600x900/?technology,mobile') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+        .header {
+            background: rgba(0, 123, 255, 0.9);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 40px;
+            border-bottom: 3px solid #fff;
+        }
+        .header div {
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            max-width: 500px;
+            margin: 40px auto;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+            color: black;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        button {
+            background: linear-gradient(45deg, #28a745, #218838);
+            color: white;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: linear-gradient(45deg, #218838, #1c7430);
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            color: white;
+            background: rgba(0, 0, 0, 0.8);
+        }
+        .voucher {
+            display: none;
+            background: white;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            color: black;
+        }
+    </style>
+</head>
+<body onload="solicitarAcceso()">
+    <script>
+        function solicitarAcceso() {
+            let usuario = prompt("Ingrese su usuario:");
+            let contraseña = prompt("Ingrese su contraseña:");
+            if (usuario !== "admin" || contraseña !== "admin2025") {
+                alert("Acceso denegado");
+                document.body.innerHTML = "<h2 style='text-align:center; margin-top: 50px;'>Acceso restringido</h2>";
+            }
+        }
+    </script>
+    <div class="header">
+        <div onclick="mostrarUsuario()">Usuario</div>
+        <div>Referencias</div>
+        <div onclick="mostrarSaldo()">Saldo</div>
+    </div>
+    <div class="container">
+        <h2>Realiza tu Recarga</h2>
+        <form id="recargaForm">
+            <label for="operador">Operador:</label>
+            <select id="operador" required>
+                <option value="Telcel">Telcel</option>
+                <option value="Movistar">Movistar</option>
+            </select>
+            <label for="telefono">Número de Teléfono:</label>
+            <input type="text" id="telefono" placeholder="Ej: 5523456789" required pattern="\d{10}">
+            <label for="monto">Monto de recarga:</label>
+            <select id="monto" required>
+                <option value="50">$50 MXN</option>
+                <option value="100">$100 MXN</option>
+                <option value="200">$200 MXN</option>
+            </select>
+            <button type="submit">Realizar Recarga</button>
+        </form>
+        <p id="mensaje"></p>
+    </div>
+    
+    <div id="voucher" class="voucher">
+        <h3>Voucher de Recarga</h3>
+        <p><strong>RUC:</strong> 2238109841</p>
+        <p><strong>Operador:</strong> <span id="voucherOperador"></span></p>
+        <p><strong>Monto:</strong> $<span id="voucherMonto"></span> MXN</p>
+    </div>
+    
+    <div class="footer">&copy; 2025 Recargas México. Todos los derechos reservados.</div>
+
+    <script>
+        function mostrarSaldo() {
+            alert("Saldo Disponible: $40,000 MXN");
+        }
+        function mostrarUsuario() {
+            alert("Usuario: admin\nID: 2810371931");
+        }
+        document.getElementById('recargaForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const operador = document.getElementById('operador').value;
+            const monto = document.getElementById('monto').value;
+            
+            document.getElementById('mensaje').innerText = "Recarga exitosa";
+            document.getElementById('voucherOperador').innerText = operador;
+            document.getElementById('voucherMonto').innerText = monto;
+            document.getElementById('voucher').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
